@@ -1,40 +1,38 @@
-//version 8.0
+//version 9.0
 //author Siddharth K
-//use case 8: Linked List Based Palindrome Checker
-import java.util.LinkedList;
+//use case 9: Recursive Palindrome Checker
+import java.util.Scanner;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Define the input string
-        String input = "level";
-        System.out.println("Input : " + input);
+        Scanner sc = new Scanner(System.in);
 
-        // Create a LinkedList to store characters
-        LinkedList<Character> list = new LinkedList<>();
+        System.out.print("Input: ");
+        String input = sc.nextLine();
 
-        // Add each character to the linked list
-        // Converting to lowercase to ensure case-insensitive comparison
-        for (char c : input.toLowerCase().toCharArray()) {
-            list.add(c);
-        }
+        // Remove spaces and convert to lowercase for accurate checking
+        String cleanInput = input.replaceAll("\\s+", "").toLowerCase();
 
-        // Flag to track palindrome state
-        boolean isPalindrome = true;
+        boolean isPalindrome = check(cleanInput, 0, cleanInput.length() - 1);
 
-        // Compare until only one or zero elements remain
-        while (list.size() > 1) {
-            // Remove first and last characters and compare them
-            char first = list.removeFirst();
-            char last = list.removeLast();
-
-            if (first != last) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        // Output the result
         System.out.println("Is Palindrome? : " + isPalindrome);
+
+        sc.close();
+    }
+
+
+    private static boolean check(String s, int start, int end) {
+        // Base case: If markers cross, all characters matched
+        if (start >= end) {
+            return true;
+        }
+
+        // Check if characters at current positions match
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call moving towards the center
+        return check(s, start + 1, end - 1);
     }
 }
-
 
