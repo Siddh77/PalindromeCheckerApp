@@ -1,31 +1,31 @@
-//version 7.0
+//version 8.0
 //author Siddharth K
-//use case 7: Deque-Based Optimized Palindrome Checker
-import java.util.ArrayDeque;
-import java.util.Deque;
+//use case 8: Linked List Based Palindrome Checker
+import java.util.LinkedList;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         // Define the input string
-        String input = "refer";
+        String input = "level";
         System.out.println("Input : " + input);
 
-        // Create a Deque to store characters
-        Deque<Character> deque = new ArrayDeque<>();
+        // Create a LinkedList to store characters
+        LinkedList<Character> list = new LinkedList<>();
 
-        // Add each character to the deque
-        for (char c : input.toCharArray()) {
-            deque.addLast(c);
+        // Add each character to the linked list
+        // Converting to lowercase to ensure case-insensitive comparison
+        for (char c : input.toLowerCase().toCharArray()) {
+            list.add(c);
         }
 
-        // Flag to track palindrome result
+        // Flag to track palindrome state
         boolean isPalindrome = true;
 
-        // Continue comparison while more than one element exists
-        while (deque.size() > 1) {
-            char first = deque.removeFirst();
-            char last = deque.removeLast();
+        // Compare until only one or zero elements remain
+        while (list.size() > 1) {
+            // Remove first and last characters and compare them
+            char first = list.removeFirst();
+            char last = list.removeLast();
 
-            // If characters from both ends don't match, it's not a palindrome
             if (first != last) {
                 isPalindrome = false;
                 break;
@@ -36,4 +36,5 @@ public class PalindromeCheckerApp {
         System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
+
 
