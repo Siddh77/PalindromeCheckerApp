@@ -1,34 +1,32 @@
-//version 6.0
+//version 7.0
 //author Siddharth K
-//use case 6: Queue + Stack Based Palindrome Check
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+//use case 7: Deque-Based Optimized Palindrome Checker
+import java.util.ArrayDeque;
+import java.util.Deque;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Define the input string to validate
-        String input = "civic";
-        System.out.println("Input: " + input);
+        // Define the input string
+        String input = "refer";
+        System.out.println("Input : " + input);
 
-        // Create a Queue to store characters in FIFO order
-        Queue<Character> queue = new LinkedList<>();
+        // Create a Deque to store characters
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Create a Stack to store characters in LIFO order
-        Stack<Character> stack = new Stack<>();
-
-        // Insert each character into both queue and stack
+        // Add each character to the deque
         for (char c : input.toCharArray()) {
-            queue.add(c);
-            stack.push(c);
+            deque.addLast(c);
         }
 
-        // Flag to track palindrome status
+        // Flag to track palindrome result
         boolean isPalindrome = true;
 
-        // Compare characters until the queue becomes empty
-        while (!queue.isEmpty()) {
-            // poll() gets the first char, pop() gets the last char
-            if (!queue.poll().equals(stack.pop())) {
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            // If characters from both ends don't match, it's not a palindrome
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
@@ -38,3 +36,4 @@ public class PalindromeCheckerApp {
         System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
+
