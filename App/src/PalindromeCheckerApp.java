@@ -1,35 +1,43 @@
-//version 10.0
+//version 11.0
 //author Siddharth K
-//use case 10: Case-Insensitive & Space-Ignored Palindrome
+//use case 11: Object-Oriented Palindrome Service
 import java.util.Scanner;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        PalindromeService service = new PalindromeService();
 
-        // Input prompt
         System.out.print("Input : ");
         String input = scanner.nextLine();
 
-        // 1. Normalization: Remove symbols/spaces and convert to lowercase
-        // [^a-zA-Z0-9] matches anything that is NOT a letter or a digit
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-
-        // 2. Palindrome Logic (based on your hint)
-        boolean isPalindrome = true;
-
-        // Compare characters from both ends
-        for (int i = 0; i < normalized.length() / 2; i++) {
-            // Compare symmetric characters
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break; // Exit loop early if a mismatch is found
-            }
-        }
-
-        // Output result
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        boolean result = service.checkPalindrome(input);
+        System.out.println("Is Palindrome? : " + result);
 
         scanner.close();
     }
 }
+    class PalindromeService {
+
+        /**
+         * Checks whether the input string is a palindrome.
+         *
+         * @param input Input string
+         * @return true if palindrome, false otherwise
+         */
+        public boolean checkPalindrome(String input) {
+            // Initialize pointers
+            int start = 0;
+            int end = input.length() - 1;
+
+            // Compare characters moving inward
+            while (start < end) {
+                if (input.charAt(start) != input.charAt(end)) {
+                    return false; // Not a palindrome
+                }
+                start++;
+                end--;
+            }
+            return true; // Is a palindrome
+        }
+    }
 
