@@ -1,38 +1,35 @@
-//version 9.0
+//version 10.0
 //author Siddharth K
-//use case 9: Recursive Palindrome Checker
+//use case 10: Case-Insensitive & Space-Ignored Palindrome
 import java.util.Scanner;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Input: ");
-        String input = sc.nextLine();
+        // Input prompt
+        System.out.print("Input : ");
+        String input = scanner.nextLine();
 
-        // Remove spaces and convert to lowercase for accurate checking
-        String cleanInput = input.replaceAll("\\s+", "").toLowerCase();
+        // 1. Normalization: Remove symbols/spaces and convert to lowercase
+        // [^a-zA-Z0-9] matches anything that is NOT a letter or a digit
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        boolean isPalindrome = check(cleanInput, 0, cleanInput.length() - 1);
+        // 2. Palindrome Logic (based on your hint)
+        boolean isPalindrome = true;
 
+        // Compare characters from both ends
+        for (int i = 0; i < normalized.length() / 2; i++) {
+            // Compare symmetric characters
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
+                isPalindrome = false;
+                break; // Exit loop early if a mismatch is found
+            }
+        }
+
+        // Output result
         System.out.println("Is Palindrome? : " + isPalindrome);
 
-        sc.close();
-    }
-
-
-    private static boolean check(String s, int start, int end) {
-        // Base case: If markers cross, all characters matched
-        if (start >= end) {
-            return true;
-        }
-
-        // Check if characters at current positions match
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call moving towards the center
-        return check(s, start + 1, end - 1);
+        scanner.close();
     }
 }
 
