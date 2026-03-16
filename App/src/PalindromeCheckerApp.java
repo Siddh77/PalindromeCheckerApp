@@ -1,21 +1,32 @@
-//version 2.0
+//version 3.0
 //author Siddharth K
-//use case 2: Hard Code
+//use case 3: String Reversal Palindrome Checker
+import java.util.Scanner;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        String input = "madam";
-        boolean isPalindrome = true;
-        for (int i = 0; i < input.length() / 2; i++) {
-            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a string to check: ");
+        String input = scanner.nextLine();
+
+        // Variable to store the reversed version of the input
+        String reversed = "";
+
+        // --- HINT IMPLEMENTATION ---
+        // Iterate from the last character to the first.
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed += input.charAt(i);
         }
-        if (isPalindrome) {
-            System.out.println(input + " is a Palindrome.");
+        // ---------------------------
+
+        // Compare original and reversed strings
+        if (input.equalsIgnoreCase(reversed)) {
+            System.out.println("Result: '" + input + "' is a palindrome.");
         } else {
-            System.out.println(input + " is NOT a Palindrome.");
+            System.out.println("Result: '" + input + "' is NOT a palindrome.");
         }
+
+        scanner.close();
+
     }
 }
-
